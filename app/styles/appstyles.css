@@ -799,6 +799,17 @@ option {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.expense-display-description {
+  max-height: 150px;
+  flex: 1 1 0%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 600;
+  font-style: italic;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 143 / var(--tw-text-opacity));
+}
+
 .expense-display-type-credit {
   display: flex;
   align-items: center;
@@ -1142,10 +1153,6 @@ input[type="radio"]:checked+label {
 
 .gap-2 {
   gap: 0.5rem;
-}
-
-.gap-\[10px\] {
-  gap: 10px;
 }
 
 .gap-\[20px\] {

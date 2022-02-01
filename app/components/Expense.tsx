@@ -8,7 +8,7 @@ export function ExpenseDisplay({ expense, canDelete, isOwner = true }: {
     return (
         <div className="expense-display-wrapper">
             <div className="flex justify-between items-start gap-4">
-                <p style={{ maxWidth: 250, maxHeight: 250 }} className="expense-display-wrapper">{expense.description || "Random expense item"}</p>
+                <p style={{ maxWidth: 250, maxHeight: 250 }} className="expense-display-description">{expense.description || "Random expense item"}</p>
                 <p className={expense.type === 'CREDIT' ? "expense-display-type-credit" : 'expense-display-type-debit'}>{expense.type === 'CREDIT' ? `+ N${expense.amount}` : `- N${expense.amount}` || "30,000"}</p>
             </div>
             <div className="flex">

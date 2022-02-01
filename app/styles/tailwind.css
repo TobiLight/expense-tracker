@@ -67,7 +67,7 @@
         @apply bg-primary-bg text-[#fff] rounded shadow-md px-4 py-2 flex flex-col justify-between w-11/12;
     }
 
-    .expense-display-name {
+    .expense-display-description {
         @apply text-ellipsis overflow-hidden font-semibold italic text-[#ffff8f] flex-1 max-h-[150px]
     }
 
