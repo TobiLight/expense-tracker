@@ -17,7 +17,6 @@ export function ExpenseItem({ expense, handleDeleteExpense }: ExpenseItemsCompon
     const fetcher = useFetcher()
     const isDeleting = fetcher.submission?.formData.get("id") === expense.id
     const isDeletionFailed = fetcher.data?.error
-    console.log(expense.description);
     return (
         <div key={expense.id} hidden={isDeleting} className={isDeleting ? 'hidden' : "bg-primary-bg text-[#fff] rounded shadow-md px-4 py-2 flex flex-col justify-between w-11/12"}>
             <div className="flex justify-between items-start gap-4">
