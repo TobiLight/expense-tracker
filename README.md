@@ -1,6 +1,6 @@
 # Expense Tracker 🤑
 
-- Are you an impulsive spender like me? Do you wonder how and what you spend on your money on and why you have little or nothing left? I created this app to track my spending habits one purchase at a time.
+- Are you an impulsive spender like me? Do you wonder how and what you spend on your money on? I created this app to track my spending habits one purchase at a time.
 
 ## Features
 
