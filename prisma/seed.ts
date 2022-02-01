@@ -35,5 +35,5 @@ seed().catch((e) => {
     throw e
 })
     .finally(async () => {
-        // await db.$disconnect()
+        await db.$disconnect()
     })
