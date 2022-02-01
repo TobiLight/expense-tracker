@@ -1,4 +1,4 @@
-import { Link, LoaderFunction, Outlet, redirect, useCatch, useLoaderData } from "remix";
+import { Link, LoaderFunction, MetaFunction, Outlet, redirect, useCatch, useLoaderData } from "remix";
 import { User } from "@prisma/client"
 import { getUserSession } from "~/utils/session.server";
 import { findUserById } from "~/db/db-operations";
@@ -7,6 +7,18 @@ import BxsHomeCircleIcon from "~/icons/HomeIcon";
 
 type LoaderData = {
     user: Pick<User, "username" | "id"> | null,
+}
+export const meta: MetaFunction = ({ data }: { data: LoaderData | undefined }) => {
+    if (!data) {
+        return {
+            title: 'No user',
+            description: 'User does not exist'
+        }
+    }
+    return {
+        title: `${data.user?.username}'s Expense Tracker Dashboard`,
+        description: `Track ${data.user?.username}'s spending habit`
+    }
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
