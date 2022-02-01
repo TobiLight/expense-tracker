@@ -22,7 +22,7 @@ export function NewExpense({ actionData, searchParams, isAdding, formRef, nameRe
                 }
             />
             <div className="flex flex-col gap-y-6">
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center gap-[20px]">
                     <div className="flex flex-col">
                         <label htmlFor="description" className="font-semibold max-w-[150px] w-full">
                             Description📝

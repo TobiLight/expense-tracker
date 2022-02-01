@@ -111,14 +111,12 @@ export const action: ActionFunction = async ({ request }) => {
                 return redirect(`/dashboard`)
             }
         } catch (e) {
-            console.error('errr', e)
             return badRequest({ formError: 'Sorry, I could not create that for you 😔' })
         }
         return
     }
 
     if (_action === 'delete') {
-        console.log('yowa');
         try {
             const userId = await getUserId(request)
             if (userId) {
