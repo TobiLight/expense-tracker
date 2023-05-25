@@ -35,7 +35,7 @@
 		$page.url.pathname.includes('/login') ||
 		$page.url.pathname.includes('/signup')
 			? 'nav flex justify-end p-4'
-			: 'fixed top-0 z-[1] w-full nav flex justify-between p-4 bg-white dark:bg-black border-b border-blue-400'}
+			: 'fixed top-0 z-[1] nav flex justify-between p-4 bg-white dark:bg-black border-b border-blue-400  w-full sm:w-2/3 md:w-3/5 lg:w-2/5 mx-auto right-0 left-0'}
 	>
 		{#if $page.url.pathname.includes('/profile')}
 			<p>Good evening, {data.user}</p>
@@ -44,11 +44,11 @@
 			<button on:click={toggleTheme} class="text-xl">{isDark ? '☀' : '🌑'}</button>
 		</div>
 	</div>
-	<main class="relative top-[60px] max-h-[85vh] h-[-webkit-fill-available] grid">
+	<main class="bg-white relative top-[60px] max-h-[85vh] h-[-webkit-fill-available] grid w-full sm:w-2/3 md:w-3/5 lg:w-2/5">
 		<slot />
 	</main>
 	{#if data && data.user}
-			<footer class="dark:bg-black bg-white fixed bottom-0 z-[1] w-full p-3 border-t border-blue-400">
+			<footer class="dark:bg-black bg-white fixed bottom-0 z-[1] p-3 border-t border-blue-400 w-full sm:w-2/3 md:w-3/5 lg:w-2/5 mx-auto right-0 left-0">
 				<form action="?/logout" method="POST">
 					<button>Logout</button>
 				</form>
@@ -65,8 +65,6 @@
 
 	main {
 		flex: 1;
-		width: 100%;
-		max-width: 64rem;
 		margin: 0 auto;
 		box-sizing: border-box;
 	}
