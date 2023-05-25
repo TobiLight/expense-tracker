@@ -26,8 +26,8 @@
 	<div class="border-b border-blue-400 pb-2 px-2">
 		<h1 class="font-bold text-gray-700 dark:text-gray-200">Transactions</h1>
 	</div>
-	<div class="flex-1 flex flex-col">
-		<div class="expense-entries max-h-[54vh] overflow-y-scroll scroll-smooth">
+	<div class="expense-entries flex-1 flex flex-col max-h-[54vh] overflow-y-scroll scroll-smooth">
+		<div class="expense-entries-container">
 			<div class="entry-1">
 				<div class="flex justify-between items-end border-b-2 border-blue-400 p-3 bg-[#03a9f433]">
 					<h1 class="font-bold text-gray-700 dark:text-gray-200">Today</h1>
@@ -138,6 +138,13 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		<div class="border-t dark:border-gray-600 pt-4 flex justify-center">
+			<a
+				href="/"
+				class="text-center mb-6 px-3 py-1 rounded-full bg-blue-400 text-white w-fit hover:bg-blue-500"
+				>Load more</a
+			>
 		</div>
 	</div>
 </div>
