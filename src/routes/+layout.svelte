@@ -47,18 +47,32 @@
 			<button on:click={toggleTheme} class="text-xl">{isDark ? '☀' : '🌑'}</button>
 		</div>
 	</div>
-	<main class="bg-white dark:bg-[#393939] relative top-[60px] max-h-[85vh] h-[-webkit-fill-available] grid w-full sm:w-2/3 md:w-3/5 lg:w-2/5">
+	<main
+		class="bg-white dark:bg-[#393939] relative top-[60px] max-h-[85vh] h-[-webkit-fill-available] grid w-full sm:w-2/3 md:w-3/5 lg:w-2/5"
+	>
 		<slot />
 	</main>
 	{#if data && data.user}
-			<nav class="dark:bg-[#393939] bg-white fixed bottom-0 z-[1] p-3 border-t border-blue-400 w-full sm:w-2/3 md:w-3/5 lg:w-2/5 mx-auto right-0 left-0 grid grid-cols-3 justify-items-center">
-				<Home class="text-2xl text-blue-500" />
-				<Add class="text-2xl text-gray-500" />
-				<form action="?/logout" method="POST">
-					<button><Logout class="text-2xl text-gray-500" /></button>
-				</form>
-			</nav>
-		{/if}
+		<nav
+			class="dark:bg-[#393939] bg-white fixed bottom-0 z-[1] p-3 border-t border-blue-400 w-full sm:w-2/3 md:w-3/5 lg:w-2/5 mx-auto right-0 left-0 grid grid-cols-3 justify-items-center"
+		>
+			<a href="/profile" class="transition-all hover:-translate-y-1 duration-300">
+				<Home class="text-2xl text-blue-500 dark:text-blue-300" />
+			</a>
+			<a href="/profile/add" class="add transition-all hover:-translate-y-1 duration-300">
+				<span class="add-icon">
+					<Add class="text-2xl text-gray-600 dark:text-gray-400" />
+				</span>
+			</a>
+			<form
+				action="?/logout"
+				method="POST"
+				class="transition-all hover:-translate-y-1 duration-300"
+			>
+				<button><Logout class="text-2xl text-gray-600 dark:text-gray-400" /></button>
+			</form>
+		</nav>
+	{/if}
 </div>
 
 <style global lang="postcss">
@@ -72,5 +86,9 @@
 		flex: 1;
 		margin: 0 auto;
 		box-sizing: border-box;
+	}
+
+	.add:hover + .add-icon {
+		@apply text-red-500;
 	}
 </style>
