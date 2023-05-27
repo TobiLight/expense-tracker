@@ -1,3 +1,8 @@
+<script>
+	import ArrowDown from '../../components/Arrow/ArrowDown.svelte';
+	import ArrowUp from '../../components/Arrow/ArrowUp.svelte';
+</script>
+
 <div
 	class="pt-4 bg-transparent border-2 border-gray-300 shadow p-4 mx-2 rounded dark:shadow-none dark:bg-[#333] dark:border-blue-300"
 >
@@ -15,9 +20,19 @@
 			</select>
 		</div>
 
-		<div class="summary flex flex-col gap-y-1">
-			<h1 class="font-semibold text-center">Spent today</h1>
-			<p class="text-2xl font-bold text-center">N120,000</p>
+		<div class="flex justify-between">
+			<div class="summary flex flex-col gap-y-1">
+				<h1 class="font-semibold text-sm text-center">Spent</h1>
+				<p class="text-md font-bold text-center">N120,000</p>
+			</div>
+			<div class="summary flex flex-col gap-y-1">
+				<h1 class="font-semibold text-sm text-center">Received</h1>
+				<p class="text-md font-bold text-center">N120,000</p>
+			</div>
+			<div class="summary flex flex-col gap-y-1">
+			<h1 class="font-semibold text-sm text-center">Total</h1>
+			<p class="text-md font-bold text-center">N120,000</p>
+		</div>
 		</div>
 	</div>
 </div>
@@ -45,7 +60,9 @@
 							</div>
 							<div class="col-span-2">
 								<h1 class="font-semibold text-gray-600 dark:text-gray-300">N3,000</h1>
-								<p />
+								<div class="flex justify-center">
+									<ArrowDown class="text-red-400 text-xl font-extrabold" />
+								</div>
 							</div>
 						</div>
 					</div>
@@ -61,7 +78,9 @@
 							</div>
 							<div class="col-span-2">
 								<h1 class="font-semibold text-gray-600 dark:text-gray-300">N3,000</h1>
-								<p />
+								<div class="flex justify-center">
+									<ArrowUp class="text-green-400 text-xl font-extrabold" />
+								</div>
 							</div>
 						</div>
 					</div>
@@ -77,7 +96,9 @@
 							</div>
 							<div class="col-span-2">
 								<h1 class="font-semibold text-gray-600 dark:text-gray-300">N3,000</h1>
-								<p />
+								<div class="flex justify-center">
+									<ArrowDown class="text-red-400 text-xl font-extrabold" />
+								</div>
 							</div>
 						</div>
 					</div>
@@ -100,7 +121,9 @@
 							</div>
 							<div class="col-span-2">
 								<h1 class="font-semibold text-gray-600 dark:text-gray-300">N3,000</h1>
-								<p />
+								<div class="flex justify-center">
+									<ArrowUp class="text-green-400 text-xl font-extrabold" />
+								</div>
 							</div>
 						</div>
 					</div>
@@ -116,7 +139,9 @@
 							</div>
 							<div class="col-span-2">
 								<h1 class="font-semibold text-gray-600 dark:text-gray-300">N3,000</h1>
-								<p />
+								<div class="flex justify-center">
+									<ArrowUp class="text-green-400 text-xl font-extrabold" />
+								</div>
 							</div>
 						</div>
 					</div>
@@ -132,7 +157,9 @@
 							</div>
 							<div class="col-span-2">
 								<h1 class="font-semibold text-gray-600 dark:text-gray-300">N3,000</h1>
-								<p />
+								<div class="flex justify-center">
+									<ArrowUp class="text-green-400 text-xl font-extrabold" />
+								</div>
 							</div>
 						</div>
 					</div>
