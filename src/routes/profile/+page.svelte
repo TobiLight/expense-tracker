@@ -1,177 +1,47 @@
 <script>
-	import ArrowDown from '../../components/Arrow/ArrowDown.svelte';
-	import ArrowUp from '../../components/Arrow/ArrowUp.svelte';
+	import ArrowDown from '$lib/components/Arrow/ArrowDown.svelte';
+	import ArrowDownAlt from '$lib/components/Arrow/ArrowDownAlt.svelte';
+	import ArrowUp from '$lib/components/Arrow/ArrowUp.svelte';
+	import ArrowUpAlt from '$lib/components/Arrow/ArrowUpAlt.svelte';
+	import RecentSales from '$lib/components/RecentSales.svelte';
 </script>
 
-<div
-	class="pt-4 bg-transparent border-2 border-gray-300 shadow p-4 mx-2 rounded dark:shadow-none dark:bg-[#333] dark:border-blue-300"
->
-	<div class="sec-1 grid gap-y-8">
-		<div class="flex justify-between">
-			<h1 class="text-xl font-bold">Summary</h1>
-			<select
-				name=""
-				id=""
-				class="bg-white dark:text-white dark:bg-transparent dark:border-b border-blue-400"
-			>
-				<option value="today" class="dark:bg-black">Today</option>
-				<option value="week" class="dark:bg-black">Last week</option>
-				<option value="month" class="dark:bg-black">Last month</option>
-			</select>
-		</div>
-
-		<div class="flex justify-between">
-			<div class="summary flex flex-col gap-y-1">
-				<h1 class="font-semibold text-sm text-center">Spent</h1>
-				<p class="text-md font-bold text-center">N120,000</p>
+<div class="pb-24">
+	<div class="pt-4 bg-transparent p-4">
+		<div class="bg-white shado-lg p-3 rounded grid justify-items-center items-center">
+			<h1 class="text-sm">This month, you have made</h1>
+			<div class="flex items-center gap-x-3">
+				<p class="font-bold text-lg">N100,000</p>
+				<ArrowUp class="text-xl text-green-500" />
 			</div>
-			<div class="summary flex flex-col gap-y-1">
-				<h1 class="font-semibold text-sm text-center">Received</h1>
-				<p class="text-md font-bold text-center">N120,000</p>
-			</div>
-			<div class="summary flex flex-col gap-y-1">
-			<h1 class="font-semibold text-sm text-center">Total</h1>
-			<p class="text-md font-bold text-center">N120,000</p>
-		</div>
+			<p>👏 🎉</p>
 		</div>
 	</div>
-</div>
 
-<div class="flex-1 max-h-[inheit] flex flex-col">
-	<div class="border-b border-blue-400 pb-2 px-2">
-		<h1 class="font-bold text-gray-700 dark:text-gray-200">Transactions</h1>
-	</div>
-	<div class="expense-entries flex-1 flex flex-col max-h-[54vh] overflow-y-scroll scroll-smooth">
-		<div class="expense-entries-container">
-			<div class="entry-1">
-				<div class="flex justify-between items-end border-b-2 border-blue-400 p-3 bg-[#03a9f433]">
-					<h1 class="font-bold text-gray-700 dark:text-gray-200">Today</h1>
-					<p class="text-sm font-semibold dark:text-gray-200">N4,000</p>
-				</div>
-				<div class="">
-					<div class="flex p-3 border-b-2 border-blue-100 dark:border-gray-600">
-						<div class="w-[75px]">
-							<p class="text-2xl">🍴</p>
-						</div>
-						<div class="flex justify-between items-start w-full">
-							<div>
-								<h1 class="font-bold text-gray-700 dark:text-gray-200">Lunch</h1>
-								<p class="text-sm italic">Restaurant</p>
-							</div>
-							<div class="col-span-2">
-								<h1 class="font-semibold text-gray-600 dark:text-gray-300">N3,000</h1>
-								<div class="flex justify-center">
-									<ArrowDown class="text-red-400 text-xl font-extrabold" />
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="flex p-3 border-b-2 border-blue-100 dark:border-gray-600">
-						<div class="w-[75px]">
-							<p class="text-2xl">📱</p>
-						</div>
-						<div class="flex justify-between items-start w-full">
-							<div>
-								<h1 class="font-bold text-gray-700 dark:text-gray-200">Airtime</h1>
-								<p class="text-sm italic">Utility</p>
-							</div>
-							<div class="col-span-2">
-								<h1 class="font-semibold text-gray-600 dark:text-gray-300">N3,000</h1>
-								<div class="flex justify-center">
-									<ArrowUp class="text-green-400 text-xl font-extrabold" />
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="flex p-3">
-						<div class="w-[75px]">
-							<p class="text-2xl">🥑</p>
-						</div>
-						<div class="flex justify-between items-start w-full">
-							<div>
-								<h1 class="font-bold text-gray-700 dark:text-gray-200">Foodstuff & stuff</h1>
-								<p class="text-sm italic">Groceries</p>
-							</div>
-							<div class="col-span-2">
-								<h1 class="font-semibold text-gray-600 dark:text-gray-300">N3,000</h1>
-								<div class="flex justify-center">
-									<ArrowDown class="text-red-400 text-xl font-extrabold" />
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="entry-2">
-				<div class="flex justify-between items-end border-b-2 border-blue-400 p-3 bg-[#03a9f433]">
-					<h1 class="font-bold text-gray-700 dark:text-gray-200">Yesterday</h1>
-					<p class="text-sm font-semibold dark:text-gray-200">N4,000</p>
-				</div>
-				<div class="">
-					<div class="flex p-3 border-b-2 border-blue-100 dark:border-gray-600">
-						<div class="w-[75px]">
-							<p class="text-2xl">🍴</p>
-						</div>
-						<div class="flex justify-between items-start w-full">
-							<div>
-								<h1 class="font-bold text-gray-700 dark:text-gray-200">Lunch</h1>
-								<p class="text-sm italic">Restaurant</p>
-							</div>
-							<div class="col-span-2">
-								<h1 class="font-semibold text-gray-600 dark:text-gray-300">N3,000</h1>
-								<div class="flex justify-center">
-									<ArrowUp class="text-green-400 text-xl font-extrabold" />
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="flex p-3 border-b-2 border-blue-100 dark:border-gray-600">
-						<div class="w-[75px]">
-							<p class="text-2xl">📱</p>
-						</div>
-						<div class="flex justify-between items-start w-full">
-							<div>
-								<h1 class="font-bold text-gray-700 dark:text-gray-200">Airtime</h1>
-								<p class="text-sm italic">Utility</p>
-							</div>
-							<div class="col-span-2">
-								<h1 class="font-semibold text-gray-600 dark:text-gray-300">N3,000</h1>
-								<div class="flex justify-center">
-									<ArrowUp class="text-green-400 text-xl font-extrabold" />
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="flex p-3">
-						<div class="w-[75px]">
-							<p class="text-2xl">🥑</p>
-						</div>
-						<div class="flex justify-between items-start w-full">
-							<div>
-								<h1 class="font-bold text-gray-700 dark:text-gray-200">Foodstuff & stuff</h1>
-								<p class="text-sm italic">Groceries</p>
-							</div>
-							<div class="col-span-2">
-								<h1 class="font-semibold text-gray-600 dark:text-gray-300">N3,000</h1>
-								<div class="flex justify-center">
-									<ArrowUp class="text-green-400 text-xl font-extrabold" />
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+	<div class="categories p-4 mx-2 grid gap-y-1">
+		<h1 class="text-xl font-semibold mb-3">Categories</h1>
+		<div class="flex items-center gap-x-6">
+			<a href="/profile/report/cake" class="transition-all delay-100 hover:-translate-y-1 px-3">
+				🎂 Cake
+			</a>
+			<a href="/profile/report/chips" class="transition-all delay-100 hover:-translate-y-1 px-3">
+				🍟 Chips
+			</a>
 		</div>
-		<div class="border-t dark:border-gray-600 pt-4 flex justify-center">
-			<a
-				href="/"
-				class="text-center mb-6 px-3 py-1 rounded-full bg-blue-400 text-white w-fit hover:bg-blue-500"
-				>Load more</a
-			>
+	</div>
+
+	<div class="recent-transactions flex-1 flex flex-col">
+		<div class="flex justify-between items-end p-4">
+			<h1 class="font-semibold">Recent sales</h1>
+			<a href="/" class="underline">View all</a>
+		</div>
+
+		<div class="flex-1 flex flex-col gap-y-6 px-4">
+			<RecentSales name="Segun" quantity={3} type="Jars" item="Chips" price={'4,500'} />
+			<RecentSales name="Mary" quantity={4} type="Normal" item="Chips" price={'400'} />
+			<RecentSales name="Tosin" quantity={3} type="Normal" item="Chips" price={'300'} />
+			<RecentSales name="Tall Segun" quantity={3} type="Jars" item="Chips" price={'4,500'} />
+			<RecentSales name="IK" quantity={3} type="Jars" item="Chips" price={'4,500'} />
 		</div>
 	</div>
 </div>
