@@ -3,29 +3,40 @@ import { error, fail, json } from "@sveltejs/kit";
 import type { Actions } from "@sveltejs/kit";
 
 export const actions = {
-    "log-expense": async (event) => {
+    "add-cake": async (event) => {
         const form = await event.request.formData();
-        const { expenseAmount } = Object.fromEntries(form);
+        const { buyer, type, price, quantity, paid, paymentMode } = Object.fromEntries(form) as {
+            buyer: string
+            type: string
+            price: string
+            quantity: string
+            paid: string
+            paymentMode: string
+        };
         try {
-            const res = await event.fetch('/api/add', {
-                method: 'POST',
+            const req = await event.fetch('/api/add/cake', {
+                method: "POST",
                 body: JSON.stringify({
-                    expenseAmount,
-
+                    buyer: buyer.trim(),
+                    type: type.trim(),
+                    price: parseInt(price),
+                    quantity: parseInt(quantity),
+                    paid: paid === 'yes' ? true : false,
+                    paymentMode
                 })
             })
-            if (res.status === 400) {
-                throw error(400, JSON.stringify(await res.json()))
+
+            if (!req.ok)
+                throw error(req.status, await req.json())
+
+            const resp = await req.json().then(data => data as { message: string })
+            return {
+                ...resp
             }
-            const response = await res.json().then((data: { expenseAmount: string }) => ({ ...data }));
-            console.log(response);
-            return { ...response }
         } catch (err: any) {
-            console.log(err);
-            if (err.status === 400) {
-                return fail(400, JSON.parse(err.body.message))
-            }
-            throw error(500, "An error has occured!")
+            console.log(err)
+            return fail(err.status as number, err.body)
+            // throw error(err.status as number, err.body as App.Error)
         }
     }
 } satisfies Actions

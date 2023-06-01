@@ -4,8 +4,15 @@
 	import ItemPreview from '$lib/components/ItemPreview.svelte';
 	import type { ActionData, SubmitFunction } from './$types';
 
-	export let form: ActionData;
-	let loading: boolean;
+	type LogCakeErrorType = {
+		buyer?: string;
+		type?: string;
+		quantity?: string;
+		price?: string;
+		paid?: string;
+		paymentMode?: string;
+		message?: string;
+	};
 
 	let buyer: string = '';
 	let type: string = '';
@@ -13,24 +20,64 @@
 	let price: number | undefined = undefined;
 	let paid: string = '';
 	let paymentMode: string = '';
-
-	const calculateTotalPrice = (qty: number, type: string) => {
-		if (type.toLowerCase() === 'normal') {
-			return qty * 100;
-		}
-		return qty * 1200;
+	let error: LogCakeErrorType = {
+		buyer: undefined,
+		type: undefined,
+		quantity: undefined,
+		price: undefined,
+		paid: undefined,
+		paymentMode: undefined,
+		message: undefined
 	};
 
 	const logExpense: SubmitFunction = ({ form, data, action, cancel }) => {
-		const { expenseAmount, expenseName, expenseType, expenseCategory } = Object.fromEntries(
-			data
-		) as {
-			expenseAmount: string;
-			expenseName: string;
-			expenseType: string;
-			expenseCategory: string;
+		const { buyer, type, quantity, price, paid, paymentMode } = Object.fromEntries(data) as {
+			buyer: string;
+			type: string;
+			quantity: string;
+			price: string;
+			paid: string;
+			paymentMode: string;
 		};
-		if (!expenseAmount || !expenseName || !expenseCategory || !expenseType) {
+
+		if (!buyer.length) {
+			console.log('Stop that!');
+			error.buyer = "Buyer's name cannot be empty!";
+			cancel();
+			return;
+		}
+
+		if (!type.length) {
+			console.log("You're selling air?");
+			error.type = 'Type cannot be empty!';
+			cancel();
+			return;
+		}
+
+		if (!price.length || !parseInt(price) || parseInt(price) <= 0) {
+			console.log('Price must be greater than 0');
+			error.price = 'Price must be greater than 0';
+			cancel();
+			return;
+		}
+
+		if (!parseInt(quantity) || parseInt(quantity) <= 0) {
+			console.log("Again, you're selling air?");
+			error.quantity = 'Quantity must be at least 1';
+			cancel();
+			return;
+		}
+
+		if (!paid.length) {
+			console.log('You must collect your money!');
+			error.paid = 'Option cannot be empty!';
+			cancel();
+			return;
+		}
+
+		if (!paymentMode.length) {
+			console.log('Cash or Trasnfer. Pick one!');
+			error.paymentMode = 'Option cannot be empty!';
 			cancel();
 			return;
 		}
@@ -38,12 +85,19 @@
 		return async ({ result, update }) => {
 			switch (result.type) {
 				case 'failure':
-					console.log('fail', result.data);
+					error.buyer = result.data?.buyer;
+					error.type = result.data?.type;
+					error.price = result.data?.price;
+					error.quantity = result.data?.quantity;
+					error.paid = result.data?.paid;
+					error.paymentMode = result.data?.paymentMode;
+					error.message = result.data?.message;
 					break;
 				case 'success':
 					console.log('result', result);
 					break;
 				default:
+					console.log('fail', result && result);
 					break;
 			}
 
@@ -55,72 +109,128 @@
 </script>
 
 <div class="h-full px-4 pb-24">
-	<form action="?/log-expense" method="POST" use:enhance={logExpense} class="flex flex-col gap-y-8">
+	<form action="?/add-cake" method="POST" use:enhance={logExpense} class="flex flex-col gap-y-8">
 		<label for="buyer">
 			Buyer
 			<input
-				required
 				name="buyer"
 				type="text"
 				class="font-semibold bg-transparent border-b outline-none w-full p-3"
 				placeholder="Segun Alinco"
+				aria-invalid={error && error.buyer && error.buyer.length > 0 ? true : false}
+				aria-errormessage={(error && error.buyer) || ''}
+				aria-required={(error && error.buyer && error.buyer.length > 0) || undefined}
 				bind:value={buyer}
+				on:keypress={(e) => {
+					error.buyer = undefined;
+				}}
 			/>
+			{#if error && error.buyer}
+				<p class="text-red-500 text-sm italic">{error.buyer}</p>
+			{/if}
 		</label>
 
 		<label for="type">
 			Type of cake
 			<input
-				required
 				name="type"
 				type="text"
-				bind:value={type}
-				placeholder="12in Vanilla cake"
 				class="font-semibold bg-transparent border-b outline-none w-full p-3"
+				placeholder="12in Vanilla cake"
+				aria-invalid={error && error.type && error.type.length > 0 ? true : false}
+				aria-errormessage={(error && error.type) || ''}
+				aria-required={(error && error.type && error.type.length > 0) || undefined}
+				bind:value={type}
+				on:keypress={(e) => {
+					error.type = undefined;
+				}}
 			/>
+			{#if error && error.type}
+				<p class="text-red-500 text-sm italic">{error.type}</p>
+			{/if}
 		</label>
 
-		<label for="type">
-			Amount
+		<label for="price">
+			Price
 			<input
-				required
-				name="amount"
+				name="price"
 				type="number"
-				bind:value={price}
 				class="font-semibold bg-transparent border rounded outline-none w-full p-3"
+				bind:value={price}
+				min={1}
+				aria-invalid={error && error.price && error.price.length > 0 ? true : false}
+				aria-errormessage={(error && error.price) || ''}
+				aria-required={(error && error.price && error.price.length > 0) || undefined}
+				on:keypress={(e) => {
+					error.price = undefined;
+				}}
 			/>
+			{#if error && error.price}
+				<p class="text-red-500 text-sm italic">{error.price}</p>
+			{/if}
 		</label>
 
 		<label for="quantity">
 			Quantity
 			<input
-				required
 				type="number"
-				name="normal-quantity"
-				id=""
-				bind:value={quantity}
-				min={0}
-				max={1000}
+				name="quantity"
 				class="bg-transparent border rounded outline-none w-full p-3"
+				bind:value={quantity}
+				min={1}
+				max={1000}
+				aria-invalid={error && error.quantity && error.quantity.length > 0 ? true : false}
+				aria-errormessage={(error && error.quantity) || ''}
+				aria-required={(error && error.quantity && error.quantity.length > 0) || undefined}
+				on:keypress={(e) => {
+					error.quantity = undefined;
+				}}
 			/>
+			{#if error && error.quantity}
+				<p class="text-red-500 text-sm italic">{error.quantity}</p>
+			{/if}
 		</label>
 
 		<label for="paid">
 			Has buyer paid?
-			<select bind:value={paid} name="paid" required>
+			<select
+				bind:value={paid}
+				name="paid"
+				aria-invalid={error && error.paid && error.paid.length > 0 ? true : false}
+				aria-errormessage={(error && error.paid) || ''}
+				aria-required={(error && error.paid && error.paid.length > 0) || undefined}
+				on:change={(e) => {
+					error.paid = undefined;
+				}}
+			>
 				<option value="">Select option</option>
 				<option value="yes">✔ Yes</option>
 				<option value="no">❌ No</option>
 			</select>
+			{#if error && error.paid}
+				<p class="text-red-500 text-sm italic">{error.paid}</p>
+			{/if}
 		</label>
 
 		<label for="payment-mode">
 			Payment mode
-			<select bind:value={paymentMode} name="payment-mode">
+			<select
+				bind:value={paymentMode}
+				name="paymentMode"
+				aria-invalid={error && error.paymentMode && error.paymentMode.length > 0 ? true : false}
+				aria-errormessage={(error && error.paymentMode) || ''}
+				aria-required={(error && error.paymentMode && error.paymentMode.length > 0) || undefined}
+				on:change={(e) => {
+					error.paymentMode = undefined;
+				}}
+			>
 				<option value="">Select option</option>
 				<option value="cash">💵 Cash</option>
 				<option value="transfer">📲 Transfer</option>
 			</select>
+			{#if error && error.paymentMode}
+				<p class="text-red-500 text-sm italic">{error.paymentMode}</p>
+			{/if}
 		</label>
 
 		{#if buyer && type && quantity && quantity > 0 && price && price > 0}
