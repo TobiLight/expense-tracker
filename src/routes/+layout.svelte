@@ -112,7 +112,7 @@
 	}
 
 	main {
-		@apply bg-white dark:bg-[#393939] relative top-[60px] h-[-webkit-fill-available] grid w-full;
+		@apply bg-white dark:bg-[#393939] h-[-webkit-fill-available] grid w-full;
 		flex: 1;
 		margin: 0 auto;
 		box-sizing: border-box;
